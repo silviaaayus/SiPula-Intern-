@@ -8,7 +8,20 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="yello">#FFA800</color>
+    <color name="yello_200">#FFE2AB</color>
+
+    <color name="second">#0FA50C</color>
+    <color name="second_200">#DBFFC8</color>
+
+    <color name="red">#FE4D4D</color>
+    <color name="red_200">#FFD5D5</color>
+
+
+    <color name="shimmer_foreground">#DADADA</color>
+    <color name="shimmer_background">#EBEBEB</color>
 
     <color name="dark_gray">#757575</color>
     <color name="light_gray">#FAFAFA</color>
+
 </resources>
