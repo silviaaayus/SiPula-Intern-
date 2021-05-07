@@ -56,6 +56,8 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
                 i.putExtra("nama_pemohon",data.getNama_pemohon());
                 i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
                 i.putExtra("nama_layanan",data.getNama_layanan());
+                i.putExtra("no_registrasi",data.getNo_registrasi());
+                i.putExtra("status_pemohon",data.getStatus_pemohon());
                 context.startActivity(i);
 
             }

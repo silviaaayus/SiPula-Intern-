@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".activity.DetailAjuanActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,26 +90,14 @@
 
         </RelativeLayout>
 
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBerita"
+            tools:listitem="@layout/row_detail_admin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/second_200"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:background="@drawable/main_shape">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:text="02-06-2020"
-                android:id="@+id/tglPengajuan"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/second"/>
-        </RelativeLayout>
+            app:spanCount="2"/>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -151,14 +145,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
             android:background="@drawable/edit_shape">
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:text="Keterangan Konsdi Pengajuan Dalam Keterangan"
+                android:hint="Keterangan Kondisi Pengajuan Dalam Keterangan"
                 android:textSize="@dimen/_15sdp"
                 android:id="@+id/txtKeterangan"
                 android:fontFamily="@font/poppins_medium"
@@ -185,5 +179,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>
