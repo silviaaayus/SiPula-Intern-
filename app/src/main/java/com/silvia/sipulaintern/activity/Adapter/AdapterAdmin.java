@@ -38,7 +38,7 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ModelAdmin data = dataAdmin.get(position);
         holder.nama.setText(data.getNama_pemohon());
-        holder.instrumen.setText(data.getStatus_pemohon());
+        holder.instrumen.setText(data.getNama_layanan());
 
 
         String date = data.getTgl_pengajuan();
@@ -55,7 +55,7 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
                 Intent i = new Intent(context, DetailAjuanActivity.class);
                 i.putExtra("nama_pemohon",data.getNama_pemohon());
                 i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
-                i.putExtra("status_pemohon",data.getStatus_pemohon());
+                i.putExtra("nama_layanan",data.getNama_layanan());
                 context.startActivity(i);
 
             }

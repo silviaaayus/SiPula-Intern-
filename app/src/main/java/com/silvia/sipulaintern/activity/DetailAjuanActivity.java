@@ -29,7 +29,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
         Intent i = new Intent(getIntent());
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
 
-        binding.txtInstument.setText(i.getStringExtra("status_pemohon"));
+        binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
 
         date = i.getStringExtra("tgl_pemohon");
         Log.e("tgl",date);

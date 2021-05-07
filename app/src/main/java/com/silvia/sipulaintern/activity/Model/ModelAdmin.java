@@ -1,8 +1,8 @@
 package com.silvia.sipulaintern.activity.Model;
 
 
-
 public class ModelAdmin  {
+
 
         private String id_pembayaran;
         private String no_registrasi;
@@ -25,8 +25,10 @@ public class ModelAdmin  {
         private String nama_perusahaan;
         private String pemilik_perusahaan;
         private String alamat_perusahaan;
+        private String nama_layanan;
+        private String img_layanan;
 
-    public ModelAdmin(String id_pembayaran, String no_registrasi, String id_pemohon, String id_layanan, String total_biaya, String total_waktu, Object id_teknisi, String file_pemohon, String bukti_pembayaran, String status_pembayaran, String status_pemohon, Object keterangan, String tgl_pengajuan, String username, String password, String nama_pemohon, String notelp_pemohon, String email_pemohon, String nama_perusahaan, String pemilik_perusahaan, String alamat_perusahaan) {
+    public ModelAdmin(String id_pembayaran, String no_registrasi, String id_pemohon, String id_layanan, String total_biaya, String total_waktu, Object id_teknisi, String file_pemohon, String bukti_pembayaran, String status_pembayaran, String status_pemohon, Object keterangan, String tgl_pengajuan, String username, String password, String nama_pemohon, String notelp_pemohon, String email_pemohon, String nama_perusahaan, String pemilik_perusahaan, String alamat_perusahaan, String nama_layanan, String img_layanan) {
         this.id_pembayaran = id_pembayaran;
         this.no_registrasi = no_registrasi;
         this.id_pemohon = id_pemohon;
@@ -48,6 +50,8 @@ public class ModelAdmin  {
         this.nama_perusahaan = nama_perusahaan;
         this.pemilik_perusahaan = pemilik_perusahaan;
         this.alamat_perusahaan = alamat_perusahaan;
+        this.nama_layanan = nama_layanan;
+        this.img_layanan = img_layanan;
     }
 
     public String getId_pembayaran() {
@@ -216,5 +220,21 @@ public class ModelAdmin  {
 
     public void setAlamat_perusahaan(String alamat_perusahaan) {
         this.alamat_perusahaan = alamat_perusahaan;
+    }
+
+    public String getNama_layanan() {
+        return nama_layanan;
+    }
+
+    public void setNama_layanan(String nama_layanan) {
+        this.nama_layanan = nama_layanan;
+    }
+
+    public String getImg_layanan() {
+        return img_layanan;
+    }
+
+    public void setImg_layanan(String img_layanan) {
+        this.img_layanan = img_layanan;
     }
 }
