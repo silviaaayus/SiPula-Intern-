@@ -61,6 +61,7 @@
 
 
     <ImageView
+        android:id="@+id/next"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:src="@drawable/ic_right"
