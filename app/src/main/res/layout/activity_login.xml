@@ -31,15 +31,20 @@
             android:fontFamily="@font/poppins"
             android:text="Pilih Level"
             android:textColor="@color/black" />
-        <Spinner
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:id="@+id/spinner_level"
-            android:paddingLeft="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_shape"/>
+            android:background="@drawable/edit_shape"
+            android:layout_marginBottom="10dp">
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:hint="Level"
+                android:inputType="text"
+                android:padding="10dp"
+                android:singleLine="true" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"

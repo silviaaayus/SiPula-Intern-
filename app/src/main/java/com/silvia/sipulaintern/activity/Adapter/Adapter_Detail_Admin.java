@@ -53,6 +53,6 @@ public class Adapter_Detail_Admin extends RecyclerView.Adapter<Adapter_Detail_Ad
             context = itemView.getContext();
             nama = itemView.findViewById(R.id.txtNamaPengajuan);
             instrumen = itemView.findViewById(R.id.txtInstument);
-                    }
+        }
     }
 }

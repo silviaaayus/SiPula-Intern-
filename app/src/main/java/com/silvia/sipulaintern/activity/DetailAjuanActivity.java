@@ -19,6 +19,7 @@ import com.silvia.sipulaintern.activity.Adapter.Adapter_Detail_Admin;
 import com.silvia.sipulaintern.activity.Model.ModelAdmin;
 import com.silvia.sipulaintern.activity.Model.ModelDetailAdmin;
 import com.silvia.sipulaintern.activity.util.ApiServer;
+import com.silvia.sipulaintern.activity.util.TinyDB;
 import com.silvia.sipulaintern.databinding.ActivityDetailAjuanBinding;
 
 import org.json.JSONArray;
@@ -30,10 +31,11 @@ import java.util.List;
 
 public class DetailAjuanActivity extends AppCompatActivity {
     private ActivityDetailAjuanBinding binding;
-    String no_reg;
+    String no_reg,file,level;
     List<ModelDetailAdmin> dataAdmin;
 
     ApiServer api;
+    TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +54,35 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
         Intent i = new Intent(getIntent());
         no_reg = i.getStringExtra("no_registrasi");
+        file = i.getStringExtra("file_pemohon");
+
+        tinyDB = new TinyDB(this);
+        level =  tinyDB.getString("keyLevel");
+
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
+
+        binding.btnSetujui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (level.equalsIgnoreCase("Admin")) {
+                    selesai();
+
+                } else if (level.equalsIgnoreCase("Pimpinan")){
+                    selesaiPimpinan();
+                }
+
+
+            }
+        });
 
         binding.rvBerita.setHasFixedSize(true);
         binding.rvBerita.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         dataAdmin = new ArrayList<>();
         getDetail();
+
+
 
     }
 
@@ -101,5 +124,76 @@ public class DetailAjuanActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void selesai() {
+
+        Log.d("URL", "selesai  : "+api.URL_SAVE_ADMIN);
+        AndroidNetworking.post(api.URL_SAVE_ADMIN)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void selesaiPimpinan() {
+
+        AndroidNetworking.post(api.URL_SAVE_PIMPINAN)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

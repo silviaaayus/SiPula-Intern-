@@ -16,6 +16,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.gson.Gson;
 import com.silvia.sipulaintern.R;
+
 import com.silvia.sipulaintern.activity.Adapter.AdapterAdmin;
 import com.silvia.sipulaintern.activity.Model.ModelAdmin;
 import com.silvia.sipulaintern.activity.util.ApiServer;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ApiServer api;
     List<ModelAdmin> dataAdmin;
     TinyDB tinyDB;
+    String level,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         AndroidNetworking.initialize(this);
         tinyDB = new TinyDB(this);
+        level =  tinyDB.getString("keyLevel");
+
+
+        binding.namaUser.setText(level);
+
 
         api = new ApiServer();
 
@@ -62,7 +69,18 @@ public class MainActivity extends AppCompatActivity {
         binding.rvBerita.setHasFixedSize(true);
         binding.rvBerita.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         dataAdmin = new ArrayList<>();
-        getAdmin();
+
+
+        if (level.equalsIgnoreCase("Admin")) {
+            getAdmin();
+
+        } else if (level.equalsIgnoreCase("Pimpinan")){
+            getpimpinan();
+        }
+
+
+
+
 
 
     }
@@ -106,4 +124,46 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+    public void getpimpinan(){
+        Log.d("api",api.URL_PIMPINAN);
+        AndroidNetworking.get(api.URL_PIMPINAN)
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            if (response.getString("status").equalsIgnoreCase("sukses")) {
+
+                                JSONArray res = response.getJSONArray("res");
+                                Gson gson = new Gson();
+                                dataAdmin.clear();
+                                for (int i = 0; i < res.length(); i++) {
+                                    JSONObject data = res.getJSONObject(i);
+                                    ModelAdmin Isi = gson.fromJson(data + "", ModelAdmin.class);
+                                    dataAdmin.add(Isi);
+                                }
+                                AdapterAdmin adapter = new AdapterAdmin(dataAdmin);
+                                binding.rvBerita.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            }else {
+
+                                Toast.makeText(MainActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("tampil menu","response:"+anError);
+                    }
+                });
+
+    }
+
+
 }
