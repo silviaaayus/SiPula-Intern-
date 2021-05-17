@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -32,8 +34,12 @@ import java.util.List;
 
 public class DetailAjuanActivity extends AppCompatActivity {
     private ActivityDetailAjuanBinding binding;
-    String no_reg,file,level;
+    String no_reg,file,level,id_layanan;
     List<ModelDetailAdmin> dataAdmin;
+
+    ArrayList<String> dataTeknisi = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    int a;
 
     ApiServer api;
     TinyDB tinyDB;
@@ -57,13 +63,14 @@ public class DetailAjuanActivity extends AppCompatActivity {
         Intent i = new Intent(getIntent());
         no_reg = i.getStringExtra("no_registrasi");
         file = i.getStringExtra("file_pemohon");
+        id_layanan = i.getStringExtra("id_layanan");
 
         binding.btnPdfView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailAjuanActivity.this, PdfActivity.class);
                 intent.putExtra("PDF", file);
-                intent.putExtra("nama", "Tst");
+                intent.putExtra("nama", "Document");
                 startActivity(intent);
             }
         });
@@ -72,14 +79,18 @@ public class DetailAjuanActivity extends AppCompatActivity {
         level =  tinyDB.getString("keyLevel");
 
         if (level.equalsIgnoreCase("Kasi")){
-            binding.teknisi.setVisibility(View.VISIBLE);
+            binding.spinteknisi.teknisi.setVisibility(View.VISIBLE);
         }else {
-            binding.teknisi.setVisibility(View.GONE);
+            binding.spinteknisi.teknisi.setVisibility(View.GONE);
         }
+
+
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
+
+       getDataTeknisi();
 
 
 
@@ -91,6 +102,8 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
                 } else if (level.equalsIgnoreCase("Pimpinan")){
                     selesaiPimpinan();
+                } else if (level.equalsIgnoreCase("Kasi")){
+                    selesaiKasi();
                 }
 
 
@@ -187,6 +200,100 @@ public class DetailAjuanActivity extends AppCompatActivity {
         AndroidNetworking.post(api.URL_SAVE_PIMPINAN)
                 .addBodyParameter("noreg", no_reg)
                 .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void getDataTeknisi(){
+        AndroidNetworking.get(api.URL_SPINTEKNISI+id_layanan)
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.d("tampilmenu","response:"+response);
+                            JSONArray res = response.getJSONArray("res");
+                            for(int i =0; i <res.length();i++){
+                                JSONObject data = res.getJSONObject(i);
+                                String nama = data.getString("nama_teknisi");
+                                dataTeknisi.add(nama);
+
+                                int id = data.getInt("id_teknisi");
+
+//                                        String gambar =api.URL_GAMBAR+data.getString("gambar_");
+
+//                                        Item[i] = nama;
+                            }
+                            setDataSpinner();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("tampil menu","response:"+anError);
+                    }
+                });
+    }
+
+    private void setDataSpinner (){
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, dataTeknisi);
+
+        //Memasukan Adapter pada Spinner
+        binding.spinteknisi.spinnerTeknisi.setAdapter(adapter);
+
+        //Mengeset listener untuk mengetahui event/aksi saat item dipilih
+        binding.spinteknisi.spinnerTeknisi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
+                a  = (int) adapter.getItemId(i)+1;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView adapterView) {
+
+            }
+        });
+    }
+
+    private void selesaiKasi() {
+
+        AndroidNetworking.post(api.URL_SAVE_KASI)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .addBodyParameter("id_teknisi", ""+a)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
