@@ -1,6 +1,7 @@
 package com.silvia.sipulaintern.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -137,5 +138,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "" + anError, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
     }
 }
