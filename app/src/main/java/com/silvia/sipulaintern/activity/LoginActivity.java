@@ -116,6 +116,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(i);
+                                } else if(level.equalsIgnoreCase("Kasi")){
+                                    Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    startActivity(i);
                                 }
 
                             } else {
