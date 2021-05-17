@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".activity.DetailAjuanActivity" />
+        <activity android:name=".activity.PdfActivity"/>
         <activity android:name=".activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
