@@ -52,12 +52,14 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
         holder.imgnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(context, DetailAjuanActivity.class);
                 i.putExtra("nama_pemohon",data.getNama_pemohon());
                 i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
                 i.putExtra("nama_layanan",data.getNama_layanan());
                 i.putExtra("no_registrasi",data.getNo_registrasi());
                 i.putExtra("status_pemohon",data.getStatus_pemohon());
+                i.putExtra("file_pemohon",data.getFile_pemohon());
                 context.startActivity(i);
 
             }
