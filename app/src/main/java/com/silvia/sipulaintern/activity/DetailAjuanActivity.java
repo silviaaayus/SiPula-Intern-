@@ -58,6 +58,16 @@ public class DetailAjuanActivity extends AppCompatActivity {
         no_reg = i.getStringExtra("no_registrasi");
         file = i.getStringExtra("file_pemohon");
 
+        binding.btnPdfView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailAjuanActivity.this, PdfActivity.class);
+                intent.putExtra("PDF", file);
+                intent.putExtra("nama", "Tst");
+                startActivity(intent);
+            }
+        });
+
         tinyDB = new TinyDB(this);
         level =  tinyDB.getString("keyLevel");
 

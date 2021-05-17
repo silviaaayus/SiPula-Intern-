@@ -10,6 +10,7 @@ public class ApiServer {
 
     public String URL_LOGIN = HOST + "login_eks.php";
     public String URL_ADMIN = HOST + "select_data_admin.php";
+    public String URL_PDF = HOST + "pdf/";
     public String URL_DETAIL_ADMIN = HOST + "select_detail_admin.php?no_registrasi=";
     public String URL_SAVE_ADMIN = HOST + "save_admin.php";
     public String URL_PIMPINAN = HOST + "select_data_pimpinan.php";
