@@ -61,9 +61,17 @@ public class DetailAjuanActivity extends AppCompatActivity {
         tinyDB = new TinyDB(this);
         level =  tinyDB.getString("keyLevel");
 
+        if (level.equalsIgnoreCase("Kasi")){
+            binding.teknisi.setVisibility(View.VISIBLE);
+        }else {
+            binding.teknisi.setVisibility(View.GONE);
+        }
+
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
+
+
 
         binding.btnSetujui.setOnClickListener(new View.OnClickListener() {
             @Override
