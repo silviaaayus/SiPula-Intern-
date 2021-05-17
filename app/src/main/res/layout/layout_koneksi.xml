@@ -21,7 +21,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
-            android:text="@string/koneksi"
+            android:text="Upps, Sepertinya Ada Masalah Jaringan, \nTap Di sini Untuk Memuat Ulang"
             android:gravity="center_horizontal" />
     </LinearLayout>
 </RelativeLayout>
