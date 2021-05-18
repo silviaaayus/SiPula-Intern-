@@ -72,65 +72,65 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getLoginTeknisi() {
-//        alertDialog.show();
-        Log.e("api", api.URL_LOGIN_TEKNISI);
-        AndroidNetworking.post(api.URL_LOGIN_TEKNISI)
-                .addBodyParameter("username", binding.edUsername.getText().toString())
-                .addBodyParameter("password", binding.edPassword.getText().toString())
-
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-//                            alertDialog.hide();
-                            int stat = response.getInt("status");
-                            String message = response.getString("message");
-                            Log.d("sukses", "code" + response);
-                            if (stat == 1) {
-
-                                JSONObject data = response.getJSONObject("data");
-                                String id_teknisi = data.getString("id_teknisi");
-
-                                String nama = data.getString("nama_teknisi");
-                                String id_layanan = data.getString("id_layanan");
-
-
-                                tinyDB.putString("keyIdTeknisi",id_teknisi);
-                                tinyDB.putString("keyNama",nama);
-                                tinyDB.putString("keyIdLayanan",id_layanan);
-
-
-
-                                tinyDB.putBoolean("keyLogin", true);
-
-                                Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(i);
-
-
-                            } else {
-                                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                        Log.d("eror", "code :" + anError);
-                        Toast.makeText(LoginActivity.this, "" + anError, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-    }
+//    private void getLoginTeknisi() {
+////        alertDialog.show();
+//        Log.e("api", api.URL_LOGIN_TEKNISI);
+//        AndroidNetworking.post(api.URL_LOGIN_TEKNISI)
+//                .addBodyParameter("username", binding.edUsername.getText().toString())
+//                .addBodyParameter("password", binding.edPassword.getText().toString())
+//
+//                .setPriority(Priority.MEDIUM)
+//                .build()
+//                .getAsJSONObject(new JSONObjectRequestListener() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+////                            alertDialog.hide();
+//                            int stat = response.getInt("status");
+//                            String message = response.getString("message");
+//                            Log.d("sukses", "code" + response);
+//                            if (stat == 1) {
+//
+//                                JSONObject data = response.getJSONObject("data");
+//                                String id_teknisi = data.getString("id_teknisi");
+//
+//                                String nama = data.getString("nama_teknisi");
+//                                String id_layanan = data.getString("id_layanan");
+//
+//
+//                                tinyDB.putString("keyIdTeknisi",id_teknisi);
+//                                tinyDB.putString("keyNama",nama);
+//                                tinyDB.putString("keyIdLayanan",id_layanan);
+//
+//
+//
+//                                tinyDB.putBoolean("keyLogin", true);
+//
+//                                Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(LoginActivity.this,MainActivity.class);
+//                                startActivity(i);
+//
+//
+//                            } else {
+//                                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError anError) {
+//
+//                        Log.d("eror", "code :" + anError);
+//                        Toast.makeText(LoginActivity.this, "" + anError, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//
+//    }
 
     private void getLogin() {
 //        alertDialog.show();
@@ -187,7 +187,6 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(i);
                                 }
                                 else if(level.equalsIgnoreCase("Teknisi")){
-                                    getLoginTeknisi();
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                     startActivity(i);

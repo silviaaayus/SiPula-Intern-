@@ -99,11 +99,12 @@ public class DetailAjuanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (level.equalsIgnoreCase("Admin")) {
                     selesai();
-
                 } else if (level.equalsIgnoreCase("Pimpinan")){
                     selesaiPimpinan();
                 } else if (level.equalsIgnoreCase("Kasi")){
                     selesaiKasi();
+                }else if(level.equalsIgnoreCase("Teknisi")){
+                    selesaiTeknisi();
                 }
 
 
@@ -117,6 +118,40 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void selesaiTeknisi() {
+        AndroidNetworking.post(api.URL_SAVE_TEKNISI)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void getDetail(){
@@ -242,7 +277,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             JSONArray res = response.getJSONArray("res");
                             for(int i =0; i <res.length();i++){
                                 JSONObject data = res.getJSONObject(i);
-                                String nama = data.getString("nama_teknisi");
+                                    String nama = data.getString("nama_teknisi");
                                 dataTeknisi.add(nama);
 
                                 int id = data.getInt("id_teknisi");
