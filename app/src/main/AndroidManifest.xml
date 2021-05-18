@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SiPulaIntern"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".activity.UploadSuratActivity"/>
         <activity android:name=".activity.DetailAjuanActivity" />
         <activity android:name=".activity.PdfActivity"/>
         <activity android:name=".activity.LoginActivity" >
