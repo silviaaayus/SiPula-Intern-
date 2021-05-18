@@ -164,34 +164,10 @@
         </RelativeLayout>
 
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:id="@+id/teknisi">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pilih Teknisi : "
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/black"/>
-
-                <Spinner
-                    android:id="@+id/spinner_teknisi"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:hint="Jenis Kelamin"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:background="@drawable/edit_shape"
-                    android:singleLine="true" />
-
-        </LinearLayout>
-
+      <include
+          android:id="@+id/spinteknisi"
+          layout="@layout/pilih_teknisi"
+          />
 
         <TextView
             android:layout_width="wrap_content"

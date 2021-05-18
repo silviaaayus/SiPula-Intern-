@@ -10,7 +10,7 @@ public class ModelAdmin  {
         private String id_layanan;
         private String total_biaya;
         private String total_waktu;
-        private Object id_teknisi;
+        private String id_teknisi;
         private String file_pemohon;
         private String bukti_pembayaran;
         private String status_pembayaran;
@@ -28,7 +28,7 @@ public class ModelAdmin  {
         private String nama_layanan;
         private String img_layanan;
 
-    public ModelAdmin(String id_pembayaran, String no_registrasi, String id_pemohon, String id_layanan, String total_biaya, String total_waktu, Object id_teknisi, String file_pemohon, String bukti_pembayaran, String status_pembayaran, String status_pemohon, Object keterangan, String tgl_pengajuan, String username, String password, String nama_pemohon, String notelp_pemohon, String email_pemohon, String nama_perusahaan, String pemilik_perusahaan, String alamat_perusahaan, String nama_layanan, String img_layanan) {
+    public ModelAdmin(String id_pembayaran, String no_registrasi, String id_pemohon, String id_layanan, String total_biaya, String total_waktu, String id_teknisi, String file_pemohon, String bukti_pembayaran, String status_pembayaran, String status_pemohon, Object keterangan, String tgl_pengajuan, String username, String password, String nama_pemohon, String notelp_pemohon, String email_pemohon, String nama_perusahaan, String pemilik_perusahaan, String alamat_perusahaan, String nama_layanan, String img_layanan) {
         this.id_pembayaran = id_pembayaran;
         this.no_registrasi = no_registrasi;
         this.id_pemohon = id_pemohon;
@@ -106,7 +106,7 @@ public class ModelAdmin  {
         return id_teknisi;
     }
 
-    public void setId_teknisi(Object id_teknisi) {
+    public void setId_teknisi(String id_teknisi) {
         this.id_teknisi = id_teknisi;
     }
 
