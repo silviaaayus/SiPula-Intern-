@@ -104,6 +104,8 @@ public class DetailAjuanActivity extends AppCompatActivity {
                     selesaiPimpinan();
                 } else if (level.equalsIgnoreCase("Kasi")){
                     selesaiKasi();
+                }else if (level.equalsIgnoreCase("Penyelia")){
+                    selesaiPenyelia();
                 }
 
 
@@ -289,6 +291,42 @@ public class DetailAjuanActivity extends AppCompatActivity {
     }
 
     private void selesaiKasi() {
+
+        AndroidNetworking.post(api.URL_SAVE_KASI)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .addBodyParameter("id_teknisi", ""+a)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void selesaiPenyelia() {
 
         AndroidNetworking.post(api.URL_SAVE_KASI)
                 .addBodyParameter("noreg", no_reg)

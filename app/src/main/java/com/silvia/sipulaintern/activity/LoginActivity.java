@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                                tinyDB.putBoolean("keyLogin", true);
+
 
                                 Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
