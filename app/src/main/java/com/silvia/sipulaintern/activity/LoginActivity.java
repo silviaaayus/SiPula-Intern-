@@ -64,16 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tempLogin.equalsIgnoreCase("Teknisi")){
-                    getLoginTeknisi();
-
-                }else{
                     getLogin();
                 }
-
-
-
-            }
         });
 
 
@@ -117,9 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(i);
-
-
-
 
 
                             } else {
@@ -193,6 +182,12 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(i);
 
                                 }else if(level.equalsIgnoreCase("Penyelia")){
+                                    Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    startActivity(i);
+                                }
+                                else if(level.equalsIgnoreCase("Teknisi")){
+                                    getLoginTeknisi();
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                     startActivity(i);
