@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         AndroidNetworking.initialize(this);
         tinyDB = new TinyDB(this);
         level =  tinyDB.getString("keyLevel");
-        teknisi =  tinyDB.getString("keyIdTeknisi");
+        teknisi =  tinyDB.getString("keyId");
 
 
         binding.namaUser.setText(level);
