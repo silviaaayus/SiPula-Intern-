@@ -101,7 +101,12 @@ public class DetailAjuanActivity extends AppCompatActivity {
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
 
 
-        binding.btnPending.setVisibility(View.GONE);
+        binding.btnPending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pendingTeknisi();
+            }
+        });
         if (binding.txtStatusPengajuan.getText().toString().equalsIgnoreCase("DI Pending")){
             binding.txtKeterangan.setVisibility(View.GONE);
             binding.ket.setVisibility(View.GONE);
