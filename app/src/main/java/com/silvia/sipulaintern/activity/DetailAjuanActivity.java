@@ -1,9 +1,11 @@
 package com.silvia.sipulaintern.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +36,7 @@ import java.util.List;
 
 public class DetailAjuanActivity extends AppCompatActivity {
     private ActivityDetailAjuanBinding binding;
-    String no_reg,file,level,id_layanan;
+    String no_reg,file,level,id_layanan, total_waktu;
     List<ModelDetailAdmin> dataAdmin;
 
     ArrayList<String> dataTeknisi = new ArrayList<>();
@@ -64,6 +66,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
         no_reg = i.getStringExtra("no_registrasi");
         file = i.getStringExtra("file_pemohon");
         id_layanan = i.getStringExtra("id_layanan");
+        total_waktu = i.getStringExtra("total_waktu");
 
         binding.btnPdfView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,29 +94,62 @@ public class DetailAjuanActivity extends AppCompatActivity {
             binding.btnTeknisi.setVisibility(View.GONE);
         }
 
-        binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
-                startActivity(intent);
-            }
-        });
-        binding.btnTolak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
 
+
+        binding.btnPending.setVisibility(View.GONE);
+        if (binding.txtStatusPengajuan.getText().toString().equalsIgnoreCase("DI Pending")){
+            binding.txtKeterangan.setVisibility(View.GONE);
+            binding.ket.setVisibility(View.GONE);
+            binding.btnPengerjaan.setText("Lanjutkan Pengerjaan");
+            binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialogLanjutkanKerjaan();
+                }
+            });
+        }
+        if (binding.txtStatusPengajuan.getText().toString().equalsIgnoreCase("Di Kerjakan")){
+            binding.btnPending.setVisibility(View.VISIBLE);
+            binding.txtKeterangan.setVisibility(View.GONE);
+            binding.ket.setVisibility(View.GONE);
+            if (total_waktu.equalsIgnoreCase("0")){
+                binding.btnPengerjaan.setText("Selesai");
+                binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selesaiTeknisi();
+                    }
+                });
+            }else {
+                binding.btnPending.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pendingTeknisi();
+                    }
+                });
+                binding.btnPengerjaan.setText("Lihat Pengerjaan");
+                binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showWaktu();
+                    }
+                });
+            }
+        }else {
+            binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialogKerjaan();
+                }
+            });
+        }
+
        getDataTeknisi();
-
-
 
         binding.btnSetujui.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,39 +179,144 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
     }
 
-//    private void selesaiTeknisi() {
-//        AndroidNetworking.post(api.URL_SAVE_TEKNISI)
-//                .addBodyParameter("noreg", no_reg)
-//                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
-//                .setPriority(Priority.MEDIUM)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//
-//                        try {
-//
-//                            if (response.getString("response").equalsIgnoreCase("sukses")){
-//                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
-//
-//                                startActivity(intent);
-//                            }else {
-//                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//
-//                        Log.d("Upload", "eror : "+ anError);
-//                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
+    private void pendingTeknisi() {
+        AndroidNetworking.post(api.URL_SAVE_PENDING_TEKNISI)
+                .addBodyParameter("noreg", no_reg)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, "Permohonan Di Pending", Toast.LENGTH_LONG).show();
+                                finish();
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void selesaiTeknisi() {
+        AndroidNetworking.post(api.URL_SAVE_SELESAI_TEKNISI)
+                .addBodyParameter("noreg", no_reg)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, "Selesai", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
+                                    startActivity(intent);
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void showWaktu() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailAjuanActivity.this);
+        alertDialogBuilder.setTitle("Sisa Waktu Pengerjaan");
+        alertDialogBuilder.setMessage("Waktu Pengerjaan Tersisa "+total_waktu+" Hari");
+        alertDialogBuilder.setPositiveButton("Oke",null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void showDialogKerjaan() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailAjuanActivity.this);
+        alertDialogBuilder.setTitle("Kerjakan Permohonan?");
+        alertDialogBuilder.setMessage("Tekan yes Jika Yakin Memulai permohonan, \nWaktu pengerjaan : "+total_waktu);
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        kerjakanTeknisi();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void showDialogLanjutkanKerjaan() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailAjuanActivity.this);
+        alertDialogBuilder.setTitle("Lanjutkan Kerjakan Permohonan?");
+        alertDialogBuilder.setMessage("Tekan yes Jika Yakin Melanjutkan permohonan, \nSisa Waktu pengerjaan : "+total_waktu);
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        kerjakanTeknisi();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void kerjakanTeknisi() {
+        AndroidNetworking.post(api.URL_SAVE_KERJAAN_TEKNISI)
+                .addBodyParameter("noreg", no_reg)
+                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if (response.getString("response").equalsIgnoreCase("sukses")){
+                                Toast.makeText(DetailAjuanActivity.this, " Waktu Tersisa : "+total_waktu, Toast.LENGTH_LONG).show();
+                                    finish();
+
+                            }else {
+                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                        Log.d("Upload", "eror : "+ anError);
+                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     public void getDetail(){
         Log.d("api",api.URL_DETAIL_ADMIN+no_reg);
