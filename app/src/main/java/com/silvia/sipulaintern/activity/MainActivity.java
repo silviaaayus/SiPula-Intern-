@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,12 +77,36 @@ public class MainActivity extends AppCompatActivity {
 
         if (level.equalsIgnoreCase("Admin")) {
             getAdmin();
+            binding.swHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    getAdmin();
+                }
+            });
 
         } else if (level.equalsIgnoreCase("Pimpinan")){
             getpimpinan();
+            binding.swHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    getpimpinan();
+                }
+            });
         } else if (level.equalsIgnoreCase("Kasi")){
             getKasi();
+            binding.swHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    getKasi();
+                }
+            });
         } else if (level.equalsIgnoreCase("Teknisi")){
+            binding.swHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    getTeknisi();
+                }
+            });
             getTeknisi();
         }else{
             getPenyelia();

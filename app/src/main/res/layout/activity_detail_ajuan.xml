@@ -173,6 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Keterangan : "
+            android:id="@+id/ket"
             android:fontFamily="@font/poppins"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
@@ -234,13 +235,13 @@
                 android:background="@drawable/main_shape"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="match_parent"
-                android:text="Pengerjaan"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"/>
+                android:text="Kerjakan"/>
 
             <Button
-                android:id="@+id/btnTolak"
+                android:id="@+id/btnPending"
                 android:layout_marginLeft="@dimen/_50sdp"
                 android:layout_weight="1"
                 android:background="@drawable/main_shape"
