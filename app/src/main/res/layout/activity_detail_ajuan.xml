@@ -234,7 +234,10 @@
                 android:background="@drawable/main_shape"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="match_parent"
-                android:text="Pengerjaan"/>
+                android:text="Pengerjaan"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
 
             <Button
                 android:id="@+id/btnTolak"
@@ -243,7 +246,11 @@
                 android:background="@drawable/main_shape"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="match_parent"
-                android:text="Pending"/>
+                android:text="Pending"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                />
         </LinearLayout>
 
     </LinearLayout>
