@@ -84,6 +84,27 @@ public class DetailAjuanActivity extends AppCompatActivity {
             binding.spinteknisi.teknisi.setVisibility(View.GONE);
         }
 
+        if(level.equalsIgnoreCase("Teknisi")){
+            binding.btnTeknisi.setVisibility(View.VISIBLE);
+            binding.btnSetujui.setVisibility(View.GONE);
+        }else{
+            binding.btnTeknisi.setVisibility(View.GONE);
+        }
+
+        binding.btnPengerjaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.btnTolak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
@@ -105,13 +126,13 @@ public class DetailAjuanActivity extends AppCompatActivity {
                     selesaiKasi();
                 }else if (level.equalsIgnoreCase("Penyelia")){
                     selesaiPenyelia();
-                }else if(level.equalsIgnoreCase("Teknisi")){
-                    selesaiTeknisi();
                 }
 
 
             }
         });
+
+
 
         binding.rvBerita.setHasFixedSize(true);
         binding.rvBerita.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -122,39 +143,39 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
     }
 
-    private void selesaiTeknisi() {
-        AndroidNetworking.post(api.URL_SAVE_TEKNISI)
-                .addBodyParameter("noreg", no_reg)
-                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-
-                            if (response.getString("response").equalsIgnoreCase("sukses")){
-                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
-
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                        Log.d("Upload", "eror : "+ anError);
-                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+//    private void selesaiTeknisi() {
+//        AndroidNetworking.post(api.URL_SAVE_TEKNISI)
+//                .addBodyParameter("noreg", no_reg)
+//                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
+//                .setPriority(Priority.MEDIUM)
+//                .build()
+//                .getAsJSONObject(new JSONObjectRequestListener() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//                        try {
+//
+//                            if (response.getString("response").equalsIgnoreCase("sukses")){
+//                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
+//
+//                                startActivity(intent);
+//                            }else {
+//                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError anError) {
+//
+//                        Log.d("Upload", "eror : "+ anError);
+//                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
 
     public void getDetail(){
         Log.d("api",api.URL_DETAIL_ADMIN+no_reg);
