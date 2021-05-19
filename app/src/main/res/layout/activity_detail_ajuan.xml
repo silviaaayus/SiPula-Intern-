@@ -217,6 +217,34 @@
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/btnTeknisi"
+            android:weightSum="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
+
+            <Button
+                android:id="@+id/btnPengerjaan"
+                android:layout_weight="1"
+                android:background="@drawable/main_shape"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="match_parent"
+                android:text="Pengerjaan"/>
+
+            <Button
+                android:id="@+id/btnTolak"
+                android:layout_marginLeft="@dimen/_50sdp"
+                android:layout_weight="1"
+                android:background="@drawable/main_shape"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:text="Pending"/>
+        </LinearLayout>
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
