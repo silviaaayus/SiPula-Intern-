@@ -229,6 +229,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             if (response.getString("response").equalsIgnoreCase("sukses")){
                                 Toast.makeText(DetailAjuanActivity.this, "Selesai", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(DetailAjuanActivity.this, UploadSuratActivity.class);
+                                    intent.putExtra("NoReg", no_reg);
                                     startActivity(intent);
                             }else {
                                 Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();

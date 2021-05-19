@@ -3,19 +3,25 @@ package com.silvia.sipulaintern.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -24,6 +30,9 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.silvia.sipulaintern.activity.util.ApiServer;
 import com.silvia.sipulaintern.databinding.ActivityUploadSuratBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -42,7 +51,7 @@ public class UploadSuratActivity extends AppCompatActivity {
     private static final String IMAGE_DIRECTORY = "/pdf";
     private String url = "https://www.google.com";
     private static final int BUFFER_SIZE = 1024 * 2;
-    String path;
+    String path, komentar;
     AlertDialog dialog;
     ApiServer apiServer;
     String noReg, total, waktu;
@@ -59,8 +68,6 @@ public class UploadSuratActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getIntent());
         noReg = intent.getStringExtra("NoReg");
-        waktu = intent.getStringExtra("Waktu");
-        total = intent.getStringExtra("Total");
         binding.noreg.setText(noReg);
 
 //        binding.totalBiaya.setText(total);
@@ -77,8 +84,7 @@ public class UploadSuratActivity extends AppCompatActivity {
         binding.lanjutBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                uploadPDF(path);
+                showDialogKomen();
             }
         });
         binding.back.setOnClickListener(new View.OnClickListener() {
@@ -90,53 +96,78 @@ public class UploadSuratActivity extends AppCompatActivity {
 
     }
 
-//    private void uploadPDF(final String path) {
-//        dialog.show();
-//        final File file = new File(path);
-//        Log.d("Upload", "URL  : "+apiServer.URL_UPLOAD_PDF+noReg);
-//        AndroidNetworking.upload(apiServer.URL_UPLOAD_PDF+noReg)
-//                .addMultipartFile("filename", file)
-//                .addMultipartParameter("filename", "value")
-//                .setPriority(Priority.MEDIUM)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        Log.d("upload","respon : "+response);
-//                        try {
-//                            int cut = String.valueOf(file).lastIndexOf('/');
-//                            String sample = path.substring(cut+1);
-//                            Log.d("Upload io", "fil :"+sample);
-////                            simpanData(sample);
-//
-//                            dialog.hide();
-//                            JSONObject jsonObject = new JSONObject(response.toString());
-//                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-//
-//                            jsonObject.toString().replace("\\\\", "");
-//
-//                            if (jsonObject.getString("status").equalsIgnoreCase("true")) {
-//
-//                                Toast.makeText(UploadSuratActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
-//                                Intent intent1 = new Intent(UploadSuratActivity.this, UploadBayarActivity.class);
-//                                intent1.putExtra("NoReg", noReg);
-//                                intent1.putExtra("Waktu", waktu);
-//                                intent1.putExtra("Total", binding.totalBiaya.getText().toString());
-//                                startActivity(intent1);
-//                            }else {
-//                                Toast.makeText(UploadSuratActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    @Override
-//                    public void onError(ANError anError) {
-//                        dialog.hide();
-//                        Log.d("io Upload", "code :"+anError);
-//                    }
-//                });
-//    }
+    private void showDialogKomen() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Tambahkan Komentar Pada File");
+
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                komentar = input.getText().toString();
+                uploadPDF(path, komentar);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void uploadPDF(final String path, String komentar) {
+        dialog.show();
+        final File file = new File(path);
+        Log.d("Upload", "URL  : "+apiServer.URL_UPLOAD_PDF+noReg);
+        AndroidNetworking.upload(apiServer.URL_UPLOAD_PDF+noReg+"&komentar="+ komentar)
+                .addMultipartFile("filename", file)
+                .addMultipartParameter("filename", "value")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("upload","respon : "+response);
+                        try {
+                            int cut = String.valueOf(file).lastIndexOf('/');
+                            String sample = path.substring(cut+1);
+                            Log.d("Upload io", "fil :"+sample);
+//                            simpanData(sample);
+
+                            dialog.hide();
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                            jsonObject.toString().replace("\\\\", "");
+
+                            if (jsonObject.getString("status").equalsIgnoreCase("true")) {
+
+                                Toast.makeText(UploadSuratActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(UploadSuratActivity.this, MainActivity.class);
+                                startActivity(intent1);
+                            }else {
+                                Toast.makeText(UploadSuratActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        dialog.hide();
+                        Log.d("io Upload", "code :"+anError);
+                    }
+                });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
