@@ -4,9 +4,9 @@ public class ApiServer {
 
 
 
-//  private String HOST ="http://192.168.100.15/sipula/";
+  private String HOST ="http://192.168.100.15/sipula/";
 
-    private String HOST ="http://192.168.43.22/sipula/";
+//    private String HOST ="http://192.168.43.22/sipula/";
 
     public String URL_LOGIN = HOST + "login_eks.php";
     public String URL_ADMIN = HOST + "select_data_admin.php";
@@ -24,8 +24,9 @@ public class ApiServer {
     public String URL_SPINTEKNISI = HOST + "select_teknisi.php?id_layanan=";
     public String URL_SAVE_KASI = HOST + "save_kasi.php";
     public String URL_TEKNISI = HOST + "select_data_teknisi.php?id_admin=";
-    public String URL_LOGIN_TEKNISI = HOST + "login_teknisi.php";
+
     public String URL_PENYELIA = HOST + "select_data_penyelia.php";
+    public String URL_SAVE_PENYELIA = HOST + "save_laporan.php";
 
 
 

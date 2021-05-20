@@ -20,7 +20,9 @@ import com.google.gson.Gson;
 import com.silvia.sipulaintern.R;
 
 import com.silvia.sipulaintern.activity.Adapter.AdapterAdmin;
+import com.silvia.sipulaintern.activity.Adapter.AdapterPenyelia;
 import com.silvia.sipulaintern.activity.Model.ModelAdmin;
+import com.silvia.sipulaintern.activity.Model.ModelPenyelia;
 import com.silvia.sipulaintern.activity.util.ApiServer;
 import com.silvia.sipulaintern.activity.util.TinyDB;
 import com.silvia.sipulaintern.databinding.ActivityMainBinding;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     ApiServer api;
     List<ModelAdmin> dataAdmin;
+
     TinyDB tinyDB;
     String level,teknisi;
 
@@ -108,14 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             getTeknisi();
-        }else{
-            getPenyelia();
         }
-
-
-
-
-
 
     }
 
@@ -279,45 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getPenyelia(){
-        Log.d("api",api.URL_PENYELIA);
-        AndroidNetworking.get(api.URL_PENYELIA)
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try{
-                            if (response.getString("status").equalsIgnoreCase("sukses")) {
 
-                                JSONArray res = response.getJSONArray("res");
-                                Gson gson = new Gson();
-                                dataAdmin.clear();
-                                for (int i = 0; i < res.length(); i++) {
-                                    JSONObject data = res.getJSONObject(i);
-                                    ModelAdmin Isi = gson.fromJson(data + "", ModelAdmin.class);
-                                    dataAdmin.add(Isi);
-                                }
-                                AdapterAdmin adapter = new AdapterAdmin(dataAdmin);
-                                binding.rvBerita.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                            }else {
-
-                                Toast.makeText(MainActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("tampil menu","response:"+anError);
-                    }
-                });
-
-    }
 
 
 }
