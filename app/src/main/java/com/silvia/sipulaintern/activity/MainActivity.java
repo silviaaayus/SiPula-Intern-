@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getAdmin(){
+        binding.swHome.setRefreshing(false);
         Log.d("api",api.URL_ADMIN);
         AndroidNetworking.get(api.URL_ADMIN)
                 .setPriority(Priority.LOW)
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getpimpinan(){
+        binding.swHome.setRefreshing(false);
         Log.d("api",api.URL_ADMIN);
         AndroidNetworking.get(api.URL_ADMIN)
                 .setPriority(Priority.LOW)
@@ -196,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getKasi(){
+        binding.swHome.setRefreshing(false);
         Log.d("api",api.URL_ADMIN);
         AndroidNetworking.get(api.URL_ADMIN)
                 .setPriority(Priority.LOW)
@@ -236,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getTeknisi(){
+        binding.swHome.setRefreshing(false);
         Log.d("api",api.URL_TEKNISI+teknisi);
         AndroidNetworking.get(api.URL_TEKNISI+teknisi)
                 .setPriority(Priority.LOW)

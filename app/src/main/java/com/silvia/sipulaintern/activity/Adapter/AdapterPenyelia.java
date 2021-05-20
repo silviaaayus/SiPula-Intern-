@@ -47,8 +47,9 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
         holder.instrumen.setText(data.getNama_layanan());
         holder.status.setText(data.getStatus_laporan());
 
+        String[] time = data.getTgl_pengajuan().split(" ");
 
-        String date = data.getTgl_pengajuan();
+        String date = time[0];
 
         String[] kal = date.split("-");
         String[] day = kal[2].split(" ");

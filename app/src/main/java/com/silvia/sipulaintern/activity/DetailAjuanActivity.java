@@ -315,6 +315,9 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
                             if (response.getString("response").equalsIgnoreCase("sukses")) {
                                 Toast.makeText(DetailAjuanActivity.this, " Waktu Tersisa : " + total_waktu, Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                                 finish();
 
                             } else {
@@ -391,8 +394,9 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             if (response.getString("response").equalsIgnoreCase("sukses")) {
                                 Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
-
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
                             }
@@ -426,8 +430,9 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             if (response.getString("response").equalsIgnoreCase("sukses")) {
                                 Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
-
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
                             }
@@ -526,8 +531,9 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             if (response.getString("response").equalsIgnoreCase("sukses")) {
                                 Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
-
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
                             }

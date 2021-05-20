@@ -3,6 +3,7 @@ package com.silvia.sipulaintern.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,12 +75,19 @@ public class PenyeliaActivity extends AppCompatActivity {
         binding.rvBerita.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         dataPenyelia = new ArrayList<>();
 
+        binding.swHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPenyelia();
+            }
+        });
 
         getPenyelia();
 
     }
 
     public void getPenyelia(){
+        binding.swHome.setRefreshing(false);
         Log.d("api",api.URL_PENYELIA);
         AndroidNetworking.get(api.URL_PENYELIA)
                 .setPriority(Priority.LOW)

@@ -44,6 +44,20 @@ public class LoginActivity extends AppCompatActivity {
         tinyDB = new TinyDB(this);
         api = new ApiServer();
 
+        if (tinyDB.getBoolean("keyLogin")){
+            if(tinyDB.getString("keyLevel").equalsIgnoreCase("Penyelia")) {
+                Intent i = new Intent(LoginActivity.this, PenyeliaActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }else {
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }
+        }
+
         AndroidNetworking.initialize(this);
 
 //        ArrayAdapter<String> Adokter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,login);
@@ -114,25 +128,35 @@ public class LoginActivity extends AppCompatActivity {
                                 if (level.equalsIgnoreCase("Admin")) {
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
+                                    finish();
                                 } else if (level.equalsIgnoreCase("Pimpinan")){
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
+                                    finish();
                                 } else if(level.equalsIgnoreCase("Kasi")){
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
+                                    finish();
 
                                 }else if(level.equalsIgnoreCase("Penyelia")){
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,PenyeliaActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
+                                    finish();
                                 }
                                 else if(level.equalsIgnoreCase("Teknisi")){
                                     Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
+                                    finish();
                                 }
 
                             } else {
