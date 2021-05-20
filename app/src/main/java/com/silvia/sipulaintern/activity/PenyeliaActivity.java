@@ -66,7 +66,7 @@ public class PenyeliaActivity extends AppCompatActivity {
 
             }
         });
-        binding.namaUser.setText(nama);
+        binding.namaUser.setText(level);
 
 
 

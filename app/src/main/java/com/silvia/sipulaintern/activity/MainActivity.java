@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getpimpinan(){
-        Log.d("api",api.URL_PIMPINAN);
-        AndroidNetworking.get(api.URL_PIMPINAN)
+        Log.d("api",api.URL_ADMIN);
+        AndroidNetworking.get(api.URL_ADMIN)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -196,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getKasi(){
-        Log.d("api",api.URL_KASI);
-        AndroidNetworking.get(api.URL_KASI)
+        Log.d("api",api.URL_ADMIN);
+        AndroidNetworking.get(api.URL_ADMIN)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

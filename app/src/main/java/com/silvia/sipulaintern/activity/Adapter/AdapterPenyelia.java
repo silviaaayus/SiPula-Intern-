@@ -16,6 +16,7 @@ import com.silvia.sipulaintern.activity.DetailAjuanActivity;
 import com.silvia.sipulaintern.activity.DetailPenyeliaActivity;
 import com.silvia.sipulaintern.activity.Model.ModelAdmin;
 import com.silvia.sipulaintern.activity.Model.ModelPenyelia;
+import com.silvia.sipulaintern.activity.util.TinyDB;
 
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPenyelia.ViewHolder holder, int position) {
+        TinyDB tinyDB = new TinyDB(context);
+        String level = tinyDB.getString("keyLevel");
 
         ModelPenyelia data = dataPenyelia.get(position);
         holder.nama.setText(data.getNama_pemohon());
@@ -53,24 +56,32 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
         String year = kal[0];
         holder.tgl.setText(day[0]+"-"+mounth+"-"+year);
 
-        holder.imgnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (level.equalsIgnoreCase("Penyelia")){
+            if (data.getStatus_laporan().equalsIgnoreCase("Waiting List Penyelia")){
 
-                Intent i = new Intent(context, DetailPenyeliaActivity.class);
-                i.putExtra("nama_pemohon",data.getNama_pemohon());
-                i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
-                i.putExtra("nama_layanan",data.getNama_layanan());
-                i.putExtra("no_registrasi",data.getNo_registrasi());
-                i.putExtra("hasil_laporan", data.getHasil_laporan());
-                i.putExtra("status_laporan",data.getStatus_laporan());
-                i.putExtra("komentar_laporan",data.getKomentar_laporan());
-                i.putExtra("id_layanan",data.getId_layanan());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                context.startActivity(i);
+                        Intent i = new Intent(context, DetailPenyeliaActivity.class);
+                        i.putExtra("nama_pemohon",data.getNama_pemohon());
+                        i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
+                        i.putExtra("nama_layanan",data.getNama_layanan());
+                        i.putExtra("no_registrasi",data.getNo_registrasi());
+                        i.putExtra("hasil_laporan", data.getHasil_laporan());
+                        i.putExtra("status_laporan",data.getStatus_laporan());
+                        i.putExtra("komentar_laporan",data.getKomentar_laporan());
+                        i.putExtra("id_layanan",data.getId_layanan());
 
+                        context.startActivity(i);
+
+                    }
+                });
+            } else{
+                holder.itemView.setEnabled(false);
             }
-        });
+        }
+
 
 
 
