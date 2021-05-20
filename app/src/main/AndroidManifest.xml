@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SiPulaIntern"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.PenyeliaActivity"></activity>
+        <activity android:name=".activity.DetailPenyeliaActivity"></activity>
+        <activity android:name=".activity.PenyeliaActivity" />
         <activity android:name=".activity.UploadSuratActivity" />
         <activity android:name=".activity.DetailAjuanActivity" />
         <activity android:name=".activity.PdfActivity" />
@@ -22,17 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
 </manifest>

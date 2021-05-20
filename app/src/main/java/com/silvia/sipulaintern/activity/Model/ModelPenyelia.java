@@ -1,7 +1,8 @@
 package com.silvia.sipulaintern.activity.Model;
 
 
-public class ModelPenyelia  {
+
+public class ModelPenyelia {
 
 
         private String id_laporan;

@@ -68,6 +68,8 @@ public class PenyeliaActivity extends AppCompatActivity {
         });
         binding.namaUser.setText(nama);
 
+
+
         binding.rvBerita.setHasFixedSize(true);
         binding.rvBerita.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         dataPenyelia = new ArrayList<>();

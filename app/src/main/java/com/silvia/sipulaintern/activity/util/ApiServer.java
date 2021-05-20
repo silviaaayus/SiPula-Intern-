@@ -26,7 +26,7 @@ public class ApiServer {
     public String URL_TEKNISI = HOST + "select_data_teknisi.php?id_admin=";
 
     public String URL_PENYELIA = HOST + "select_data_penyelia.php";
-    public String URL_SAVE_PENYELIA = HOST + "save_laporan.php";
+    public String URL_SAVE_PENYELIA = HOST + "save_penyelia.php";
 
 
 

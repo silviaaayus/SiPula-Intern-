@@ -72,7 +72,6 @@ public class DetailAjuanActivity extends AppCompatActivity {
         Intent i = new Intent(getIntent());
         no_reg = i.getStringExtra("no_registrasi");
         file = i.getStringExtra("file_pemohon");
-        laporan = i.getStringExtra("hasil_laporan");
         id_layanan = i.getStringExtra("id_layanan");
         total_waktu = i.getStringExtra("total_waktu");
         total_biaya = i.getStringExtra("total_biaya");
@@ -84,19 +83,13 @@ public class DetailAjuanActivity extends AppCompatActivity {
         binding.btnPdfView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(level.equalsIgnoreCase("Penyelia")){
-                    Intent intent = new Intent(DetailAjuanActivity.this, PdfActivity.class);
-                    intent.putExtra("PDF", laporan);
-                    intent.putExtra("nama", "Document");
-                    startActivity(intent);
-                }else{
                     Intent intent = new Intent(DetailAjuanActivity.this, PdfActivity.class);
                     intent.putExtra("PDF", file);
                     intent.putExtra("nama", "Document");
                     startActivity(intent);
                 }
 
-            }
+
         });
 
         tinyDB = new TinyDB(this);
@@ -119,16 +112,10 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
-
-        if (level.equalsIgnoreCase("Penyelia")){
-            binding.txtStatusPengajuan.setText(i.getStringExtra("status_laporan"));
-            binding.txtKeterangan.setText(i.getStringExtra("komentar_laporan"));
-
-        } else{
-            binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
-        }
-
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
+
+
+
         binding.txtBiaya.setText(formatRupiah.format(Integer.valueOf(total_biaya)));
         binding.txtNoReg.setText(no_reg);
         binding.txtWaktu.setText(total_waktu);
@@ -466,6 +453,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
     }
 
     public void getDataTeknisi(){
+        Log.d("teknisi",api.URL_SPINTEKNISI+id_layanan);
         AndroidNetworking.get(api.URL_SPINTEKNISI+id_layanan)
                 .setPriority(Priority.LOW)
                 .build()
@@ -478,7 +466,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             JSONArray res = response.getJSONArray("res");
                             for(int i =0; i <res.length();i++){
                                 JSONObject data = res.getJSONObject(i);
-                                    String nama = data.getString("nama_admin");
+                                    String nama = data.getString("nama_teknisi");
                                 dataTeknisi.add(nama);
 
                                 id = data.getInt("id_teknisi");
@@ -561,39 +549,5 @@ public class DetailAjuanActivity extends AppCompatActivity {
                 });
     }
 
-//    private void selesaiPenyelia() {
-//
-//        AndroidNetworking.post(api.URL_SAVE_PENYELIA)
-//                .addBodyParameter("noreg", no_reg)
-//                .addBodyParameter("keterangan", binding.txtKeterangan.getText().toString())
-//
-//                .setPriority(Priority.MEDIUM)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//
-//                        try {
-//
-//                            if (response.getString("response").equalsIgnoreCase("sukses")){
-//                                Toast.makeText(DetailAjuanActivity.this, " Berhasil", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(DetailAjuanActivity.this, MainActivity.class);
-//
-//                                startActivity(intent);
-//                            }else {
-//                                Toast.makeText(DetailAjuanActivity.this, "Upload Gagal", Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//
-//                        Log.d("Upload", "eror : "+ anError);
-//                        Toast.makeText(DetailAjuanActivity.this, "Jaringan Bermasalah", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
+
 }
