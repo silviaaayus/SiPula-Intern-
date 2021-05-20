@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,248 +11,389 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/tollbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/purple_500">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tollbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/purple_500">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:rotation="180"
+                        android:src="@drawable/ic_right"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/_105sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Detail Pengajuan"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/_90sdp">
 
                 <ImageView
-                    android:id="@+id/back"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:rotation="180"
-                    app:tint="@color/white" />
+                    android:src="@drawable/top_shape"
+                    app:tint="@color/purple_500" />
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="@dimen/_105sdp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Detail Pengajuan"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_margin="@dimen/_20sdp"
+                    android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp">
-            <ImageView
+                    <TextView
+                        android:id="@+id/txtNamaPengaju"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Nama Pengaju"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <TextView
+                        android:id="@+id/txtInstument"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Instrumen Ajuan"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/top_shape"
-                android:rotation="180"
-                app:tint="@color/purple_500" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/main_shape"
+                    android:backgroundTint="@color/yello_200"
+                    android:paddingLeft="@dimen/_20sdp"
+                    android:paddingRight="@dimen/_20sdp">
+
+                    <TextView
+                        android:id="@+id/txtNoReg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="UPT_1620359734"
+                        android:textColor="@color/yello"
+                        android:textSize="@dimen/_10sdp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/_20sdp">
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Pengaju"
-                android:id="@+id/txtNamaPengaju"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_18sdp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Instrumen Ajuan"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/white"
-                    android:id="@+id/txtInstument"/>
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Total Biaya"
+                    android:textColor="@color/dark_gray"/>
 
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/main_shape"
+                    android:backgroundTint="@color/second_200"
+                    android:paddingLeft="@dimen/_20sdp"
+                    android:paddingRight="@dimen/_20sdp">
+
+                    <TextView
+                        android:id="@+id/txtBiaya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Rp. 100.000"
+                        android:textColor="@color/second"
+                        android:textSize="@dimen/_10sdp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sisa"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Sisa Waktu"
+                    android:textColor="@color/dark_gray"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/main_shape"
+                    android:backgroundTint="@color/red_200"
+                    android:paddingLeft="@dimen/_20sdp"
+                    android:paddingRight="@dimen/_20sdp">
+
+                    <TextView
+                        android:id="@+id/txtWaktu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="22 Hari"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/_10sdp" />
+                </RelativeLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:id="@+id/btnPdfView"
-            android:background="@drawable/edview"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_20sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Lihat File Ajuan"
-                android:fontFamily="@font/poppins_bold"
-                android:layout_gravity="center"
+            <RelativeLayout
+                android:id="@+id/btnPdfView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="@color/black"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_eye"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/_20sdp"/>
-
-
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBerita"
-            tools:listitem="@layout/row_detail_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="1" />
-
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status Pengajuan : "
-            android:fontFamily="@font/poppins"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/black"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:background="@drawable/edit_shape">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:text="Di Periksa"
-                android:textSize="@dimen/_15sdp"
-                android:id="@+id/txtStatusPengajuan"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/black"/>
-        </RelativeLayout>
+                android:background="@drawable/edview"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Lihat File Ajuan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:src="@drawable/ic_eye" />
 
 
-      <include
-          android:id="@+id/spinteknisi"
-          layout="@layout/pilih_teknisi"
-          />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Keterangan : "
-            android:id="@+id/ket"
-            android:fontFamily="@font/poppins"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/black"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBerita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/row_detail_admin" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:background="@drawable/edit_shape">
-            <EditText
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:hint="Keterangan Kondisi Pengajuan Dalam Keterangan"
-                android:textSize="@dimen/_15sdp"
-                android:id="@+id/txtKeterangan"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/black"/>
-        </RelativeLayout>
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Status Pengajuan : "
+                android:textColor="@color/black" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:id="@+id/btnSetujui"
-            android:background="@drawable/main_shape">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/edit_shape">
+
+                <TextView
+                    android:id="@+id/txtStatusPengajuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Di Periksa"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
+
+
+            <include
+                android:id="@+id/spinteknisi"
+                layout="@layout/pilih_teknisi" />
+
+            <TextView
+                android:id="@+id/ket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Keterangan : "
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/edit_shape">
+
+                <EditText
+                    android:id="@+id/txtKeterangan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Keterangan Kondisi Pengajuan Dalam Keterangan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="@dimen/_16sdp"
                 android:layout_height="wrap_content"
-                android:text="Setujui"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Bukti Bayar : "
+                android:textColor="@color/black" />
 
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/btnTeknisi"
-            android:weightSum="2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/edit_shape">
 
-            <Button
-                android:id="@+id/btnPengerjaan"
-                android:layout_weight="1"
-                android:background="@drawable/main_shape"
-                android:layout_width="@dimen/_120sdp"
+                <ImageView
+                    android:id="@+id/imgBuktiBayar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:scaleType="fitCenter"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/btnSetujui"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/main_shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Setujui"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/btnTeknisi"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"
-                android:text="Kerjakan"/>
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <Button
-                android:id="@+id/btnPending"
-                android:layout_marginLeft="@dimen/_50sdp"
-                android:layout_weight="1"
-                android:background="@drawable/main_shape"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="match_parent"
-                android:text="Pending"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"
-                />
+                <Button
+                    android:id="@+id/btnPengerjaan"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/main_shape"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Kerjakan"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnPending"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/main_shape"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Pending"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>
