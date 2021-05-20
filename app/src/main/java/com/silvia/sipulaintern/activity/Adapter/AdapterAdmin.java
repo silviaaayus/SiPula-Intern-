@@ -39,7 +39,7 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
         ModelAdmin data = dataAdmin.get(position);
         holder.nama.setText(data.getNama_pemohon());
         holder.instrumen.setText(data.getNama_layanan());
-
+        holder.status.setText(data.getStatus_pemohon());
 
         String date = data.getTgl_pengajuan();
 
@@ -49,7 +49,7 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
         String year = kal[0];
         holder.tgl.setText(day[0]+"-"+mounth+"-"+year);
 
-        holder.imgnext.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -63,6 +63,8 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
                 i.putExtra("file_pemohon",data.getFile_pemohon());
                 i.putExtra("id_layanan",data.getId_layanan());
                 i.putExtra("total_waktu", data.getTotal_waktu());
+                i.putExtra("total_biaya", data.getTotal_biaya());
+                i.putExtra("bukti_bayar", data.getBukti_pembayaran());
                 context.startActivity(i);
 
             }
@@ -77,12 +79,13 @@ public class AdapterAdmin extends RecyclerView.Adapter<AdapterAdmin.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nama,instrumen, tgl;
+        TextView nama,instrumen, tgl, status;
         ImageView imgnext;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
             nama = itemView.findViewById(R.id.txtNamaPengajuan);
+            status = itemView.findViewById(R.id.statusPengajuan);
             instrumen = itemView.findViewById(R.id.txtInstument);
             tgl = itemView.findViewById(R.id.tglPengajuan);
             imgnext = itemView.findViewById(R.id.next);

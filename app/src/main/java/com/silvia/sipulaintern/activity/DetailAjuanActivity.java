@@ -26,17 +26,20 @@ import com.silvia.sipulaintern.activity.Model.ModelDetailAdmin;
 import com.silvia.sipulaintern.activity.util.ApiServer;
 import com.silvia.sipulaintern.activity.util.TinyDB;
 import com.silvia.sipulaintern.databinding.ActivityDetailAjuanBinding;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailAjuanActivity extends AppCompatActivity {
     private ActivityDetailAjuanBinding binding;
-    String no_reg,file,level,id_layanan, total_waktu;
+    String no_reg,file,level,id_layanan, total_waktu, total_biaya, bukti_bayar;
     List<ModelDetailAdmin> dataAdmin;
 
     ArrayList<String> dataTeknisi = new ArrayList<>();
@@ -52,6 +55,8 @@ public class DetailAjuanActivity extends AppCompatActivity {
         binding = ActivityDetailAjuanBinding.inflate(getLayoutInflater());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
+        Locale localeId = new Locale("in", "ID");
+        final NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeId);
 
         api = new ApiServer();
 
@@ -67,6 +72,11 @@ public class DetailAjuanActivity extends AppCompatActivity {
         file = i.getStringExtra("file_pemohon");
         id_layanan = i.getStringExtra("id_layanan");
         total_waktu = i.getStringExtra("total_waktu");
+        total_biaya = i.getStringExtra("total_biaya");
+        bukti_bayar = i.getStringExtra("bukti_bayar");
+
+        Picasso.get().load(api.URL_GAMBAR+bukti_bayar).into(binding.imgBuktiBayar);
+
 
         binding.btnPdfView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,16 +100,18 @@ public class DetailAjuanActivity extends AppCompatActivity {
         if(level.equalsIgnoreCase("Teknisi")){
             binding.btnTeknisi.setVisibility(View.VISIBLE);
             binding.btnSetujui.setVisibility(View.GONE);
+            binding.sisa.setVisibility(View.VISIBLE);
         }else{
+            binding.sisa.setVisibility(View.GONE);
             binding.btnTeknisi.setVisibility(View.GONE);
         }
-
-
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
         binding.txtStatusPengajuan.setText(i.getStringExtra("status_pemohon"));
-
+        binding.txtBiaya.setText(formatRupiah.format(Integer.valueOf(total_biaya)));
+        binding.txtNoReg.setText(no_reg);
+        binding.txtWaktu.setText(total_waktu);
 
         binding.btnPending.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -443,6 +455,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
+                            int id = 0;
                             Log.d("tampilmenu","response:"+response);
                             JSONArray res = response.getJSONArray("res");
                             for(int i =0; i <res.length();i++){
@@ -450,13 +463,14 @@ public class DetailAjuanActivity extends AppCompatActivity {
                                     String nama = data.getString("nama_teknisi");
                                 dataTeknisi.add(nama);
 
-                                int id = data.getInt("id_teknisi");
+                                id = data.getInt("id_teknisi");
+                                Log.d("id Select Teknisi ", "true : "+id);
 
 //                                        String gambar =api.URL_GAMBAR+data.getString("gambar_");
 
 //                                        Item[i] = nama;
                             }
-                            setDataSpinner();
+                            setDataSpinner(id);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -470,7 +484,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                 });
     }
 
-    private void setDataSpinner (){
+    private void setDataSpinner (int id){
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, dataTeknisi);
 
@@ -482,8 +496,8 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
-                a  = (int) adapter.getItemId(i)+1;
-
+                a  = id;
+                Log.d("id Select Teknisi ", "false : "+a);
             }
 
             @Override

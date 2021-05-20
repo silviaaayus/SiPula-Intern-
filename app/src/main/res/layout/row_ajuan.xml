@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/_20sdp"
-    android:layout_marginRight="@dimen/_20sdp"
     android:layout_marginTop="@dimen/_10sdp"
-    android:translationZ="@dimen/_3sdp"
+    android:layout_marginRight="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     android:background="@drawable/main_shape"
     android:backgroundTint="@color/white"
-    android:layout_marginBottom="@dimen/_10sdp">
+    android:translationZ="@dimen/_3sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,42 +19,71 @@
 
 
         <TextView
+            android:id="@+id/txtNamaPengajuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
             android:text="Nama Pengaju"
-            android:id="@+id/txtNamaPengajuan"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sdp" />
 
         <TextView
+            android:id="@+id/txtInstument"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Instrumen Ajuan"
             android:fontFamily="@font/poppins"
-            android:textColor="@color/black"
-            android:id="@+id/txtInstument"/>
+            android:text="Instrumen Ajuan"
+            android:textColor="@color/black" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
-            android:background="@drawable/main_shape">
-            <TextView
+            android:orientation="horizontal">
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:text="02-06-2020"
-                android:id="@+id/tglPengajuan"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/purple_500"/>
-        </RelativeLayout>
+                android:background="@drawable/main_shape"
+                android:backgroundTint="@color/purple_200">
 
+                <TextView
+                    android:id="@+id/tglPengajuan"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_8sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="02-06-2020"
+                    android:textColor="@color/purple_500" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/main_shape"
+                android:backgroundTint="@color/second_200">
+
+                <TextView
+                    android:id="@+id/statusPengajuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Waiting List Teknisi"
+                    android:textColor="@color/second" />
+            </RelativeLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -64,10 +92,10 @@
         android:id="@+id/next"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
-        android:src="@drawable/ic_right"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
+        android:src="@drawable/ic_right"
         app:tint="@color/black" />
 
 
