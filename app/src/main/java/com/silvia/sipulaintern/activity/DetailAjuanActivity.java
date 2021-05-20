@@ -478,7 +478,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                             JSONArray res = response.getJSONArray("res");
                             for(int i =0; i <res.length();i++){
                                 JSONObject data = res.getJSONObject(i);
-                                    String nama = data.getString("nama_teknisi");
+                                    String nama = data.getString("nama_admin");
                                 dataTeknisi.add(nama);
 
                                 id = data.getInt("id_teknisi");
