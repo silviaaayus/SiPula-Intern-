@@ -40,7 +40,7 @@ public class PdfActivity extends AppCompatActivity implements DownloadFile.Liste
         Intent intent = new Intent(getIntent());
         String url = apiServer.URL_PDF;
         String pdf = url+intent.getStringExtra("PDF");
-        String laporan = url+intent.getStringExtra("PDF");
+
         String nama = intent.getStringExtra("nama");
         Log.d("pdf", "| isi : "+pdf);
 
@@ -55,7 +55,7 @@ public class PdfActivity extends AppCompatActivity implements DownloadFile.Liste
         });
 
         remotePDFViewPager = new RemotePDFViewPager(this, pdf, this);
-        remotePDFViewPager = new RemotePDFViewPager(this, laporan, this);
+
         dialog.show();
     }
 

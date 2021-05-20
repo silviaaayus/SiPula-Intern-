@@ -28,7 +28,7 @@ public class DetailPenyeliaActivity extends AppCompatActivity {
     ApiServer api;
     TinyDB tinyDB;
 
-    String no_reg,laporan;
+    String no_reg,file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class DetailPenyeliaActivity extends AppCompatActivity {
 
         Intent i = new Intent(getIntent());
         no_reg = i.getStringExtra("no_registrasi");
-        laporan = i.getStringExtra("hasil_laporan");
+        file = i.getStringExtra("hasil_laporan");
 
         binding.txtNamaPengaju.setText(i.getStringExtra("nama_pemohon"));
         binding.txtInstument.setText(i.getStringExtra("nama_layanan"));
@@ -63,7 +63,7 @@ public class DetailPenyeliaActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(DetailPenyeliaActivity.this, PdfActivity.class);
-                intent.putExtra("PDF", laporan);
+                intent.putExtra("PDF", file);
                 intent.putExtra("nama", "Document");
                 startActivity(intent);
             }
