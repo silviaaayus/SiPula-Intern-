@@ -46,21 +46,21 @@ public class LoginActivity extends AppCompatActivity {
 
         AndroidNetworking.initialize(this);
 
-        ArrayAdapter<String> Adokter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,login);
-        Adokter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinner.setAdapter(Adokter);
-
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tempLogin = login[i];
-                Log.e("spinner",tempLogin);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
+//        ArrayAdapter<String> Adokter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,login);
+//        Adokter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.spinner.setAdapter(Adokter);
+//
+//        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                tempLogin = login[i];
+//                Log.e("spinner",tempLogin);
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//                // TODO Auto-generated method stub
+//            }
+//        });
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         AndroidNetworking.post(api.URL_LOGIN)
                 .addBodyParameter("username", binding.edUsername.getText().toString())
                 .addBodyParameter("password", binding.edPassword.getText().toString())
-                .addBodyParameter("level_admin",tempLogin )
+
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
