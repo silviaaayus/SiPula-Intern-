@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.silvia.sipulaintern.R;
 import com.silvia.sipulaintern.activity.DetailAjuanActivity;
+import com.silvia.sipulaintern.activity.DetailPenyeliaActivity;
 import com.silvia.sipulaintern.activity.Model.ModelAdmin;
 import com.silvia.sipulaintern.activity.Model.ModelPenyelia;
 
@@ -41,6 +42,7 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
         ModelPenyelia data = dataPenyelia.get(position);
         holder.nama.setText(data.getNama_pemohon());
         holder.instrumen.setText(data.getNama_layanan());
+        holder.status.setText(data.getStatus_laporan());
 
 
         String date = data.getTgl_pengajuan();
@@ -55,7 +57,7 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context, DetailAjuanActivity.class);
+                Intent i = new Intent(context, DetailPenyeliaActivity.class);
                 i.putExtra("nama_pemohon",data.getNama_pemohon());
                 i.putExtra("tgl_pemohon",data.getTgl_pengajuan());
                 i.putExtra("nama_layanan",data.getNama_layanan());
@@ -81,7 +83,7 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nama,instrumen, tgl;
+        TextView nama,instrumen, tgl, status;
         ImageView imgnext;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +93,7 @@ public class AdapterPenyelia extends RecyclerView.Adapter<AdapterPenyelia.ViewHo
             instrumen = itemView.findViewById(R.id.txtInstument);
             tgl = itemView.findViewById(R.id.tglPengajuan);
             imgnext = itemView.findViewById(R.id.next);
+            status = itemView.findViewById(R.id.statusPengajuan);
         }
     }
 }
