@@ -45,6 +45,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
     List<ModelDetailAdmin> dataAdmin;
 
     ArrayList<String> dataTeknisi = new ArrayList<>();
+    ArrayList<String> id = new ArrayList<>();
     ArrayAdapter<String> adapter;
     int a;
 
@@ -460,7 +461,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            int id = 0;
+
                             Log.d("tampilmenu", "response:" + response);
                             JSONArray res = response.getJSONArray("res");
                             for (int i = 0; i < res.length(); i++) {
@@ -469,15 +470,15 @@ public class DetailAjuanActivity extends AppCompatActivity {
                                     String nama = data.getString("nama_teknisi");
 
                                 dataTeknisi.add(nama);
-
-                                id = data.getInt("id_teknisi");
+                                id.add(data.getInt("id_teknisi")+"");
+//                                id[i] = data.getInt("id_teknisi");?
                                 Log.d("id Select Teknisi ", "true : " + id);
 
 //                                        String gambar =api.URL_GAMBAR+data.getString("gambar_");
 
 //                                        Item[i] = nama;
                             }
-                            setDataSpinner(id);
+                            setDataSpinner();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -491,7 +492,7 @@ public class DetailAjuanActivity extends AppCompatActivity {
                 });
     }
 
-    private void setDataSpinner(int id) {
+    private void setDataSpinner() {
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, dataTeknisi);
 
@@ -503,8 +504,10 @@ public class DetailAjuanActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
-                a = id;
+                a = Integer.parseInt(id.get(i));
                 Log.d("id Select Teknisi ", "false : " + a);
+                Log.d("id Select Teknisi ", "ie : " + i);
+                Log.d("id Select Teknisi ", "long : " + l);
             }
 
             @Override
